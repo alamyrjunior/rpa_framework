@@ -1,0 +1,6 @@
+project_name: "My project name"
+log_level: "TRACE"
+queue_type: "in_memory"  # Pode ser "in_memory", "rabbitmq", etc.
+max_retries: 2
+create_items: True
+teste: "Teste"
