@@ -10,7 +10,9 @@ class InitTask:
         self.context = context
 
     def execute(self, first_run):
+        
         if first_run:
+            logger.info("Processo iniciado.")
             create_items = self.config.get("create_items")
             clear_queue = self.config.get("clear_queue")
             if clear_queue:
@@ -18,6 +20,7 @@ class InitTask:
             if create_items:
                 # Adiciona itens na fila
                 add_to_queue(self.queue_manager)
+        logger.info("Iniciando aplicações")
         init_all_applications(self.config, self.context)
 
-        logger.info("Processo iniciado com sucesso.")
+       

@@ -16,11 +16,13 @@ class ProcessTask:
     def execute(self):
         transaction_number = 0
         while not self.queue_manager.is_empty():
-            transaction_number += 1
+            
             queue_item = self.queue_manager.get_item()
+            retries = queue_item["retries"]
+            if retries == 0:
+                transaction_number += 1
             queue_item["transaction_number"] = transaction_number
             logger.info(f"Processando: item {transaction_number}")
-            retries = queue_item["retries"]
             max_retries = 2
             try:
                 if retries > 0:
